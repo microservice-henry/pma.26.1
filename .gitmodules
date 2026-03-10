@@ -1,0 +1,6 @@
+[submodule "api/account"]
+	path = api/account
+	url = https://github.com/microservice-henry/pma.26.1.account.git
+[submodule "api/account-service"]
+	path = api/account-service
+	url = https://github.com/microservice-henry/pma.26.1.account-service.git
