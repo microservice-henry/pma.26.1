@@ -1,3 +1,4 @@
+
 name: store-api
 
 services:
@@ -11,7 +12,7 @@ services:
       - ${VOLUME_DB}:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${DB_USER:-store}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-devpass}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
       POSTGRES_DB: ${DB_NAME:-store}
 
   account:
@@ -19,13 +20,56 @@ services:
       context: ./account-service
       dockerfile: Dockerfile
     hostname: account
-    ports:
-      - 8080:8080
     environment:
       DATABASE_HOST: db
       DATABASE_PORT: 5432
       DATABASE_DB: ${DB_NAME:-store}
       DATABASE_USERNAME: ${DB_USER:-store}
-      DATABASE_PASSWORD: ${DB_PASSWORD:-devpass}
+      DATABASE_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+    deploy:
+      replicas: 1
     depends_on:
       - db
+
+  auth:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    hostname: auth
+    deploy:
+      replicas: 1
+    environment:
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:?JWT_SECRET_KEY is required}
+      JWT_HTTP_ONLY: ${JWT_HTTP_ONLY:-true}
+    depends_on:
+      - account
+
+  gateway:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    hostname: gateway
+    environment:
+      CORS_ALLOWED_CREDENTIALS: ${CORS_ALLOWED_CREDENTIALS:-true}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-*}
+    ports:
+      - 8080:8080
+
+  prometheus:
+    image: prom/prometheus:latest
+    hostname: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ${SETUP}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    hostname: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:?GRAFANA_ADMIN_PASSWORD is required}
+    volumes:
+      - ${SETUP}/grafana:/var/lib/grafana
+      - ${SETUP}/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
