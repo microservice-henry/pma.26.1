@@ -1,0 +1,5 @@
+{
+  "priority": 2,
+  "request": { "method": "GET", "urlPathPattern": "/exchange/.*" },
+  "response": { "status": 404 }
+}

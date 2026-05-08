@@ -1,0 +1,5 @@
+{
+  "priority": 1,
+  "request": { "method": "GET", "urlPath": "/products/id-inexistente" },
+  "response": { "status": 404 }
+}

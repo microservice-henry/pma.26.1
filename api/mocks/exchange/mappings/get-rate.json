@@ -1,0 +1,5 @@
+{
+  "priority": 1,
+  "request": { "method": "GET", "urlPath": "/exchange", "queryParameters": { "from": { "equalTo": "USD" }, "to": { "equalTo": "BRL" } } },
+  "response": { "status": 200, "jsonBody": { "rate": 6.0 }, "headers": { "Content-Type": "application/json" } }
+}

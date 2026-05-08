@@ -1,0 +1,4 @@
+{
+  "request": { "method": "GET", "urlPath": "/products/0195abfb-7074-73a9-9d26-b4b9fbaab0a8" },
+  "response": { "status": 200, "jsonBody": { "id": "0195abfb-7074-73a9-9d26-b4b9fbaab0a8", "price": 10.12 }, "headers": { "Content-Type": "application/json" } }
+}

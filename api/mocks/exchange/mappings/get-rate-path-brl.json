@@ -1,0 +1,5 @@
+{
+  "priority": 1,
+  "request": { "method": "GET", "urlPath": "/exchange/BRL" },
+  "response": { "status": 200, "jsonBody": { "currency": "BRL", "rate": 6.0 }, "headers": { "Content-Type": "application/json" } }
+}
