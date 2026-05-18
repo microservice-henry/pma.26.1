@@ -143,6 +143,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+# Nunca commitar isso:
+.env
+.env.*
+*.env
+~/.aws/
 
 # Spyder project settings
 .spyderproject
