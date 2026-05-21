@@ -1,0 +1,59 @@
+site_name: Store Platform — Henry, Nathan & Kauã
+site_url: https://microservice-henry.github.io/pma.26.1/
+site_author: Henry Idesis, Nathan, Kauã
+site_description: Documentação do grupo — PMA 26.1 | Plataforma de Microsserviços
+
+theme:
+  name: material
+  language: pt
+  palette:
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Alternar para modo escuro
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Alternar para modo claro
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.sections
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Arquitetura: architecture.md
+  - Microsserviços:
+      - Order API: microservices/order.md
+      - Exchange API: microservices/exchange.md
+      - Product API: microservices/product.md
+  - Infraestrutura:
+      - AWS: infra/aws.md
+      - EKS: infra/eks.md
+      - CI/CD: infra/cicd.md
+  - Testes de Carga: load-testing.md
+  - Bottlenecks: bottlenecks.md
+  - Custos & SLA: custos.md
+  - PaaS: paas.md
