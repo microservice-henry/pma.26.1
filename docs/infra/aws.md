@@ -55,32 +55,32 @@ O CLI armazena essas informações em `~/.aws/credentials` (fora do repositório
 
 ```mermaid
 graph TD
-    Internet([Internet / Cliente])
+    Internet([Internet]) -->|HTTP porta 80| NLB[NLB Network Load Balancer]
 
-    subgraph AWS["AWS — us-east-2 (Ohio)"]
-        NLB["NLB\nNetwork Load Balancer\n:80"]
+    subgraph aws["AWS us-east-2 Ohio"]
+        NLB
 
-        subgraph VPC["VPC (subnets privadas — 2 AZs)"]
-            subgraph EKS["EKS Cluster"]
-                subgraph SYS["kube-system"]
-                    DNS[coredns x2]
-                    METRICS[metrics-server]
-                    NODE[aws-node]
-                end
-                subgraph APP["default"]
-                    GW[gateway]
-                    Auth[auth]
-                    Acct[account]
-                    Order[order]
-                    PG[postgres]
-                end
+        subgraph eks["EKS Cluster eks-store"]
+            subgraph system["kube-system"]
+                DNS[coredns]
+                METRICS[metrics-server]
+                NODE[aws-node]
+            end
+
+            subgraph app["default - pods de aplicacao"]
+                GW[gateway]
+                Auth[auth]
+                Acct[account]
+                Order[order]
+                PG[postgres]
             end
         end
     end
 
-    Internet -->|HTTP :80| NLB
     NLB --> GW
-    GW --> Auth & Acct & Order
+    GW --> Auth
+    GW --> Acct
+    GW --> Order
     Auth --> Acct
     Order --> PG
     Acct --> PG

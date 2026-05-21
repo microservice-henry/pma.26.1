@@ -21,17 +21,17 @@
 
 ```mermaid
 graph TD
-    subgraph PaaS["PaaS (gerenciado pelo provedor)"]
+    subgraph paas["PaaS - gerenciado pelo provedor"]
         EKS[EKS Control Plane]
         NLB[Network Load Balancer]
         GHP[GitHub Pages]
         DH[Docker Hub]
     end
 
-    subgraph IaaS["IaaS (gerenciado pelo grupo)"]
+    subgraph iaas["IaaS - gerenciado pelo grupo"]
         EC2[EC2 Workers]
         PG[PostgreSQL em Pod]
-        APP[Aplicações Spring Boot]
+        APP[Aplicacoes Spring Boot]
     end
 ```
 
