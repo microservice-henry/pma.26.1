@@ -25,8 +25,8 @@ API REST para gerenciamento de pedidos dos usuários autenticados. Integra-se co
 
 ```mermaid
 graph LR
-    Order -->|GET /products/{id}| Product
-    Order -->|GET /exchange/{currency}| Exchange
+    Order -->|GET /products/id| Product
+    Order -->|GET /exchange/currency| Exchange
 ```
 
 ---
