@@ -1,6 +1,6 @@
 # Exchange API
 
-**Responsável:** Nathan  
+**Responsável:** Kauã Makiyama
 **Documentação individual:** *(adicionar link)*
 
 ---
@@ -23,7 +23,7 @@ API REST para gerenciamento de taxas de câmbio entre diferentes moedas. Utiliza
 
 | Tecnologia | Versão |
 |-----------|--------|
-| *(a preencher por Nathan)* | |
+| *(a preencher por Kauã)* | |
 
 ---
 
@@ -31,9 +31,9 @@ API REST para gerenciamento de taxas de câmbio entre diferentes moedas. Utiliza
 
 | Módulo | Link |
 |--------|------|
-| *(a preencher por Nathan)* | |
+| *(a preencher por Kauã)* | |
 
 ---
 
 !!! note "Seção a completar"
-    Esta seção será preenchida por Nathan. Para mais detalhes, consulte a documentação individual.
+    Esta seção será preenchida por Kauã. Para mais detalhes, consulte a documentação individual.
