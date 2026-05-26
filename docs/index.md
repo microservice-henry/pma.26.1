@@ -17,7 +17,7 @@ Plataforma de e-commerce baseada em arquitetura de microsserviços, onde usuári
 |-------|--------------|------------------------|
 | Henry Idesis | Order API | [microservice-henry.github.io/pma.26.1-docs](https://microservice-henry.github.io/pma.26.1-docs/) |
 | Nathan Benaion | Product API | [microservice-henry.github.io/pma.261.product](https://microservice-henry.github.io/pma.261.product/) |
-| Kauã Makiyama | Exchange API | *(adicionar link)* |
+| Kauã Makiyama | Exchange API | [microservice-henry.github.io/pma.26.1.exchange](https://microservice-henry.github.io/pma.26.1.exchange/) |
 
 ---
 
@@ -32,7 +32,7 @@ Plataforma de e-commerce baseada em arquitetura de microsserviços, onde usuári
 | Account Service | [microservice-henry/pma.26.1.account-service](https://github.com/microservice-henry/pma.26.1.account-service) |
 | Auth Service | [microservice-henry/pma.261.auth-service](https://github.com/microservice-henry/pma.261.auth-service) |
 | Product Service | [microservice-henry/pma.261.product](https://github.com/microservice-henry/pma.261.product) |
-| Exchange Service | *(adicionar repositório — Kauã)* |
+| Exchange Service | [microservice-henry/pma.26.1.exchange](https://github.com/microservice-henry/pma.26.1.exchange) |
 | Repositório do grupo | [repo-classes/pma.261](https://github.com/repo-classes/pma.261) |
 
 ---
@@ -44,8 +44,8 @@ Plataforma de e-commerce baseada em arquitetura de microsserviços, onde usuári
 | API Gateway | 5% | ✅ |
 | Autenticação e Autorização | 5% | ✅ |
 | Account Management | 5% | ✅ |
-| Product Catalog | 5% | ✅ *(Nathan)* |
-| Currency Exchange | 5% | *(Kauã)* |
+| Product Catalog | 5% | ✅ |
+| Currency Exchange | 5% | ✅ |
 | Bottlenecks | 20% | ✅ |
 | AWS Cloud Setup | 5% | ✅ |
 | Orquestração (EKS) | 10% | ✅ |
