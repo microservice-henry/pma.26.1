@@ -9,7 +9,7 @@
         <meta name="description" content="Documentação do grupo — PMA 26.1 | Plataforma de Microsserviços">
       
       
-        <meta name="author" content="Henry Idesis, Nathan, Kauã">
+        <meta name="author" content="Henry Idesis, Nathan Benaion, Kauã Makiyama">
       
       
         <link rel="canonical" href="https://microservice-henry.github.io/pma.26.1/microservices/product/">
@@ -21,11 +21,8 @@
         <link rel="next" href="../../infra/aws/">
       
       
-        
-      
-      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
     
     
       
@@ -33,10 +30,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -59,6 +56,7 @@
     
       
 
+    
     
     
   </head>
@@ -154,13 +152,11 @@
     
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -192,14 +188,13 @@
     </div>
   </div>
 </div>
-      
     
     
       <div class="md-header__source">
         <a href="https://github.com/microservice-henry/pma.26.1" title="Ir ao repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     microservice-henry/pma.26.1
@@ -245,7 +240,7 @@
       <a href="https://github.com/microservice-henry/pma.26.1" title="Ir ao repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
   </div>
   <div class="md-source__repository">
     microservice-henry/pma.26.1
@@ -265,16 +260,9 @@
       <a href="../.." class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Home
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -292,16 +280,9 @@
       <a href="../../architecture/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Arquitetura
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -317,7 +298,6 @@
   
   
   
-    
     
     
     
@@ -337,16 +317,9 @@
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
-  
   <span class="md-ellipsis">
-    
-  
     Microsserviços
-  
-
-    
   </span>
-  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -355,11 +328,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            
-  
-    Microsserviços
-  
-
+            Microsserviços
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -373,16 +342,9 @@
       <a href="../order/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Order API
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -401,16 +363,9 @@
       <a href="../exchange/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Exchange API
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -438,16 +393,9 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
-  
   <span class="md-ellipsis">
-    
-  
     Product API
-  
-
-    
   </span>
-  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -456,16 +404,9 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Product API
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -488,9 +429,7 @@
         <li class="md-nav__item">
   <a href="#descricao" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        Descrição
-      
+      Descrição
     </span>
   </a>
   
@@ -499,9 +438,7 @@
         <li class="md-nav__item">
   <a href="#endpoints" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        Endpoints
-      
+      Endpoints
     </span>
   </a>
   
@@ -510,9 +447,16 @@
         <li class="md-nav__item">
   <a href="#stack" class="md-nav__link">
     <span class="md-ellipsis">
+      Stack
+    </span>
+  </a>
+  
+</li>
       
-        Stack
-      
+        <li class="md-nav__item">
+  <a href="#bottlenecks-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottlenecks implementados
     </span>
   </a>
   
@@ -521,9 +465,7 @@
         <li class="md-nav__item">
   <a href="#repositorios" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        Repositórios
-      
+      Repositórios
     </span>
   </a>
   
@@ -554,7 +496,6 @@
     
     
     
-    
       
         
         
@@ -573,16 +514,9 @@
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
-  
   <span class="md-ellipsis">
-    
-  
     Infraestrutura
-  
-
-    
   </span>
-  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -591,11 +525,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            
-  
-    Infraestrutura
-  
-
+            Infraestrutura
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -609,16 +539,9 @@
       <a href="../../infra/aws/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     AWS
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -637,16 +560,9 @@
       <a href="../../infra/eks/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     EKS
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -665,16 +581,9 @@
       <a href="../../infra/cicd/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     CI/CD
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -700,16 +609,9 @@
       <a href="../../load-testing/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Testes de Carga
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -727,16 +629,9 @@
       <a href="../../bottlenecks/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Bottlenecks
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -754,16 +649,9 @@
       <a href="../../custos/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     Custos & SLA
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -781,16 +669,9 @@
       <a href="../../paas/" class="md-nav__link">
         
   
-  
   <span class="md-ellipsis">
-    
-  
     PaaS
-  
-
-    
   </span>
-  
   
 
       </a>
@@ -827,9 +708,7 @@
         <li class="md-nav__item">
   <a href="#descricao" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        Descrição
-      
+      Descrição
     </span>
   </a>
   
@@ -838,9 +717,7 @@
         <li class="md-nav__item">
   <a href="#endpoints" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        Endpoints
-      
+      Endpoints
     </span>
   </a>
   
@@ -849,9 +726,16 @@
         <li class="md-nav__item">
   <a href="#stack" class="md-nav__link">
     <span class="md-ellipsis">
+      Stack
+    </span>
+  </a>
+  
+</li>
       
-        Stack
-      
+        <li class="md-nav__item">
+  <a href="#bottlenecks-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottlenecks implementados
     </span>
   </a>
   
@@ -860,9 +744,7 @@
         <li class="md-nav__item">
   <a href="#repositorios" class="md-nav__link">
     <span class="md-ellipsis">
-      
-        Repositórios
-      
+      Repositórios
     </span>
   </a>
   
@@ -878,22 +760,21 @@
           
           
             <div class="md-content" data-md-component="content">
-              
               <article class="md-content__inner md-typeset">
                 
                   
-
 
   
   
 
 
 <h1 id="product-api">Product API</h1>
-<p><strong>Responsável:</strong> Kauã<br />
-<strong>Documentação individual:</strong> <em>(adicionar link)</em></p>
+<p><strong>Responsável:</strong> Nathan Benaion
+<strong>Documentação individual:</strong> <a href="https://microservice-henry.github.io/pma.261.product/">microservice-henry.github.io/pma.261.product</a></p>
 <hr />
 <h2 id="descricao">Descrição</h2>
-<p>API REST para gerenciamento de produtos disponíveis na plataforma. Utilizada pelo Order Service para consultar preço e disponibilidade de produtos no momento da criação de pedidos.</p>
+<p>API REST para gerenciamento do catálogo de produtos da loja — criação, listagem (com filtro opcional por nome), consulta individual e remoção. É a fonte de verdade que o Order Service consulta via OpenFeign para enriquecer os itens de cada pedido com nome e preço atualizados.</p>
+<p>Para suportar a carga típica de catálogos (poucas escritas, muitas leituras repetidas dos mesmos <code>id</code>), o serviço implementa <strong>cache Redis</strong> com TTL de 60 segundos e expõe <strong>métricas Prometheus</strong> via Spring Actuator.</p>
 <hr />
 <h2 id="endpoints">Endpoints</h2>
 <table>
@@ -906,17 +787,28 @@
 </thead>
 <tbody>
 <tr>
-<td><code>GET</code></td>
-<td><code>/products/{id}</code></td>
-<td>Retorna detalhes e preço de um produto</td>
+<td><code>POST</code></td>
+<td><code>/products</code></td>
+<td>Cria um novo produto</td>
 </tr>
 <tr>
 <td><code>GET</code></td>
 <td><code>/products</code></td>
-<td>Lista produtos disponíveis</td>
+<td>Lista produtos (filtro opcional <code>?name=</code>)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/products/{id}</code></td>
+<td>Busca produto por id (servido por cache)</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/products/{id}</code></td>
+<td>Remove produto (e invalida cache)</td>
 </tr>
 </tbody>
 </table>
+<p>Todas as rotas autenticadas exigem o header <code>id-account</code> (injetado pelo Gateway após validar o JWT).</p>
 <hr />
 <h2 id="stack">Stack</h2>
 <table>
@@ -928,8 +820,71 @@
 </thead>
 <tbody>
 <tr>
-<td><em>(a preencher por Kauã)</em></td>
-<td></td>
+<td>Java</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Spring Boot</td>
+<td>4.0.3</td>
+</tr>
+<tr>
+<td>Spring Data JPA</td>
+<td>4.0.3</td>
+</tr>
+<tr>
+<td>Spring Boot Starter Cache</td>
+<td>4.0.3</td>
+</tr>
+<tr>
+<td>Spring Boot Starter Data Redis</td>
+<td>4.0.3</td>
+</tr>
+<tr>
+<td>Spring Boot Starter Actuator</td>
+<td>4.0.3</td>
+</tr>
+<tr>
+<td>Micrometer Registry Prometheus</td>
+<td>runtime</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>16 (schema <code>products</code>)</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>7-alpine</td>
+</tr>
+<tr>
+<td>Flyway</td>
+<td>4.0.3</td>
+</tr>
+<tr>
+<td>Docker image</td>
+<td><code>microservice-henry/product:latest</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="bottlenecks-implementados">Bottlenecks implementados</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Bottleneck</th>
+<th>Speedup mensurado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Cache Redis em <code>@Cacheable</code> (TTL 60s, prefix <code>products::</code>)</td>
+<td><strong>8×</strong> (26ms → 4ms); 6 GETs HTTP → 0 queries no Postgres</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Métricas nativas de cache via Micrometer + Actuator</td>
+<td>qualitativo (<code>/actuator/prometheus</code>, <code>/actuator/caches/products</code>)</td>
 </tr>
 </tbody>
 </table>
@@ -944,15 +899,15 @@
 </thead>
 <tbody>
 <tr>
-<td><em>(a preencher por Kauã)</em></td>
-<td></td>
+<td>Product Service</td>
+<td><a href="https://github.com/microservice-henry/pma.261.product">microservice-henry/pma.261.product</a></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<div class="admonition note">
-<p class="admonition-title">Seção a completar</p>
-<p>Esta seção será preenchida por Kauã. Para mais detalhes, consulte a documentação individual.</p>
+<div class="admonition info">
+<p class="admonition-title">Documentação completa</p>
+<p>Para endpoints detalhados com exemplos <code>cURL</code>/<code>Python</code>, modelo de erro RFC 7807, decisões de arquitetura, guia de development e detalhes dos bottlenecks, acesse a <a href="https://microservice-henry.github.io/pma.261.product/">documentação individual de Nathan</a>.</p>
 </div>
 
 
@@ -1006,13 +961,10 @@
     </div>
     
     
-    
-      
-      
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.expand", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.expand", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
       
     
   </body>
