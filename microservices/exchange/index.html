@@ -433,6 +433,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variáveis de ambiente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bottlenecks-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottlenecks implementados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#repositorios" class="md-nav__link">
     <span class="md-ellipsis">
       Repositórios
@@ -724,6 +742,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#variaveis-de-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variáveis de ambiente
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bottlenecks-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bottlenecks implementados
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#repositorios" class="md-nav__link">
     <span class="md-ellipsis">
       Repositórios
@@ -752,10 +788,10 @@
 
 <h1 id="exchange-api">Exchange API</h1>
 <p><strong>Responsável:</strong> Kauã Makiyama
-<strong>Documentação individual:</strong> <em>(adicionar link)</em></p>
+<strong>Documentação individual:</strong> <a href="https://microservice-henry.github.io/pma.26.1.exchange/">microservice-henry.github.io/pma.26.1.exchange</a></p>
 <hr />
 <h2 id="descricao">Descrição</h2>
-<p>API REST para gerenciamento de taxas de câmbio entre diferentes moedas. Utilizada pelo Order Service para conversão de totais de pedidos quando o cliente solicita em moeda diferente de USD.</p>
+<p>API REST em Python/FastAPI para consulta de taxas de câmbio em tempo real entre duas moedas. As cotações vêm da AwesomeAPI, são cacheadas em Redis por 60 segundos e o endpoint principal exige autenticação via JWT. Utilizada pelo Order Service para conversão de totais de pedidos quando o cliente solicita em moeda diferente de USD.</p>
 <hr />
 <h2 id="endpoints">Endpoints</h2>
 <table>
@@ -763,17 +799,35 @@
 <tr>
 <th>Método</th>
 <th>Rota</th>
+<th>Autenticação</th>
 <th>Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>GET</code></td>
-<td><code>/exchange/{currency}</code></td>
-<td>Retorna a taxa de câmbio de USD para a moeda solicitada</td>
+<td><code>/exchanges/health-check</code></td>
+<td>Pública</td>
+<td>Verifica disponibilidade do serviço e do Redis</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/exchanges/{from}/{to}</code></td>
+<td>Bearer JWT</td>
+<td>Retorna a taxa de câmbio entre duas moedas (códigos de 3–5 letras maiúsculas)</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Response 200 OK (<code>/exchanges/{from}/{to}</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;sell&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.12</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;buy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.08</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-05-25 18:30:00&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;id-account&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0195abfb-...&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">&quot;cached&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Códigos de erro:</strong> <code>401</code> (token inválido), <code>404</code> (par de moedas inexistente), <code>422</code> (formato inválido), <code>502</code> (timeout &gt;10s na AwesomeAPI).</p>
 <hr />
 <h2 id="stack">Stack</h2>
 <table>
@@ -781,12 +835,105 @@
 <tr>
 <th>Tecnologia</th>
 <th>Versão</th>
+<th>Função</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><em>(a preencher por Kauã)</em></td>
-<td></td>
+<td>Python</td>
+<td>3.12</td>
+<td>Linguagem</td>
+</tr>
+<tr>
+<td>FastAPI</td>
+<td>0.115.0</td>
+<td>Framework web</td>
+</tr>
+<tr>
+<td>Uvicorn</td>
+<td>0.32.0</td>
+<td>Servidor ASGI</td>
+</tr>
+<tr>
+<td>httpx</td>
+<td>≥0.28.1</td>
+<td>HTTP assíncrono para a AwesomeAPI</td>
+</tr>
+<tr>
+<td>python-jose</td>
+<td>3.3.0</td>
+<td>Validação de JWT</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>≥5.0.0</td>
+<td>Cache (TTL 60s)</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>—</td>
+<td>Containerização</td>
+</tr>
+<tr>
+<td>AwesomeAPI</td>
+<td>—</td>
+<td>Provedor externo de cotações</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="variaveis-de-ambiente">Variáveis de ambiente</h2>
+<table>
+<thead>
+<tr>
+<th>Variável</th>
+<th>Default</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>JWT_SECRET</code></td>
+<td><code>secret</code></td>
+<td>Chave de validação do JWT (trocar em produção)</td>
+</tr>
+<tr>
+<td><code>JWT_ALGORITHM</code></td>
+<td><code>HS256</code></td>
+<td>Algoritmo do JWT</td>
+</tr>
+<tr>
+<td><code>REDIS_HOST</code></td>
+<td><code>localhost</code></td>
+<td>Host do Redis</td>
+</tr>
+<tr>
+<td><code>REDIS_PORT</code></td>
+<td><code>6379</code></td>
+<td>Porta do Redis</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="bottlenecks-implementados">Bottlenecks implementados</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Bottleneck</th>
+<th>Solução</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>Cache Redis (60s TTL)</td>
+<td>Requisições repetidas para o mesmo par de moedas dentro da janela são respondidas direto do Redis, sem chamar a AwesomeAPI</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Graceful degradation do cache</td>
+<td>Falha no Redis não derruba o serviço — fallback consulta a AwesomeAPI diretamente, mantendo disponibilidade</td>
 </tr>
 </tbody>
 </table>
@@ -801,15 +948,15 @@
 </thead>
 <tbody>
 <tr>
-<td><em>(a preencher por Kauã)</em></td>
-<td></td>
+<td>Exchange Service</td>
+<td><a href="https://github.com/microservice-henry/pma.26.1.exchange">microservice-henry/pma.26.1.exchange</a></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<div class="admonition note">
-<p class="admonition-title">Seção a completar</p>
-<p>Esta seção será preenchida por Kauã. Para mais detalhes, consulte a documentação individual.</p>
+<div class="admonition info">
+<p class="admonition-title">Documentação completa</p>
+<p>Para endpoints detalhados com exemplos, fluxo de requisição, código completo e detalhes dos bottlenecks, acesse a <a href="https://microservice-henry.github.io/pma.26.1.exchange/">documentação individual de Kauã</a>.</p>
 </div>
 
 
