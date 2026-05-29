@@ -19,3 +19,9 @@
 [submodule "api/order-service"]
 	path = api/order-service
 	url = https://github.com/microservice-henry/pma.261.order-service.git
+[submodule "api/product-service"]
+	path = api/product-service
+	url = https://github.com/microservice-henry/pma.261.product
+[submodule "api/exchange-service"]
+	path = api/exchange-service
+	url = https://github.com/microservice-henry/pma.26.1.exchange
