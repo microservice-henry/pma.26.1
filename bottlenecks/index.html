@@ -629,20 +629,68 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nathan-exchange-api" class="md-nav__link">
+  <a href="#kaua-exchange-api" class="md-nav__link">
     <span class="md-ellipsis">
-      Nathan — Exchange API
+      Kauã — Exchange API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kauã — Exchange API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cache-redis-com-ttl-de-60-segundos" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cache Redis com TTL de 60 segundos
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#kaua-product-api" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2-graceful-degradation-do-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      Kauã — Product API
+      2. Graceful Degradation do Cache
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nathan-product-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nathan — Product API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nathan — Product API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cache-redis-em-cacheable-ttl-60s" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cache Redis em @Cacheable (TTL 60s)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-metricas-nativas-de-cache-via-micrometer-actuator" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Métricas nativas de cache via Micrometer + Actuator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -763,20 +811,68 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nathan-exchange-api" class="md-nav__link">
+  <a href="#kaua-exchange-api" class="md-nav__link">
     <span class="md-ellipsis">
-      Nathan — Exchange API
+      Kauã — Exchange API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kauã — Exchange API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cache-redis-com-ttl-de-60-segundos" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cache Redis com TTL de 60 segundos
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#kaua-product-api" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2-graceful-degradation-do-cache" class="md-nav__link">
     <span class="md-ellipsis">
-      Kauã — Product API
+      2. Graceful Degradation do Cache
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nathan-product-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nathan — Product API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nathan — Product API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cache-redis-em-cacheable-ttl-60s" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cache Redis em @Cacheable (TTL 60s)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-metricas-nativas-de-cache-via-micrometer-actuator" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Métricas nativas de cache via Micrometer + Actuator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -841,17 +937,96 @@
 <p>Ver <a href="https://microservice-henry.github.io/pma.26.1-docs/bottlenecks/">documentação individual de Henry</a> para análise completa com diagramas e testes.</p>
 </div>
 <hr />
-<h2 id="nathan-exchange-api">Nathan — Exchange API</h2>
-<div class="admonition note">
-<p class="admonition-title">A preencher</p>
-<p>Nathan deve adicionar aqui os bottlenecks implementados na Exchange API (mínimo 2).</p>
-</div>
+<h2 id="kaua-exchange-api">Kauã — Exchange API</h2>
+<h3 id="1-cache-redis-com-ttl-de-60-segundos">1. Cache Redis com TTL de 60 segundos</h3>
+<p>Requisições repetidas para o mesmo par de moedas são respondidas diretamente do Redis, sem chamar a AwesomeAPI externa.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;exchange:rate:</span><span class="si">{</span><span class="n">par</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">cached</span> <span class="o">=</span> <span class="k">await</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">if</span> <span class="n">cached</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cached</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;rate&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;sell&quot;</span><span class="p">]}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># somente na primeira requisição chama a API externa</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">await</span> <span class="n">r</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">CACHE_TTL</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">armazenavel</span><span class="p">))</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Comportamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primeira requisição (cache miss)</td>
+<td>Chama AwesomeAPI, armazena no Redis por 60s</td>
+</tr>
+<tr>
+<td>Requisições seguintes (cache hit)</td>
+<td>Respondidas direto do Redis, sem chamada externa</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="kaua-product-api">Kauã — Product API</h2>
-<div class="admonition note">
-<p class="admonition-title">A preencher</p>
-<p>Kauã deve adicionar aqui os bottlenecks implementados na Product API (mínimo 2).</p>
-</div>
+<h3 id="2-graceful-degradation-do-cache">2. Graceful Degradation do Cache</h3>
+<p>Se o Redis estiver indisponível, o serviço não cai — faz fallback direto para a AwesomeAPI, mantendo disponibilidade total.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">cache_conn</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">Redis</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="n">_cache</span> <span class="o">=</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">REDIS_HOST</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">REDIS_PORT</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">await</span> <span class="n">_cache</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">_cache</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># fallback: sem cache, mas o serviço continua</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">return</span> <span class="n">_cache</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Cenário</th>
+<th>Antes</th>
+<th>Depois</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Redis fora do ar</td>
+<td>Serviço crashava com erro de conexão</td>
+<td>Serviço continua respondendo via AwesomeAPI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="nathan-product-api">Nathan — Product API</h2>
+<h3 id="1-cache-redis-em-cacheable-ttl-60s">1. Cache Redis em <code>@Cacheable</code> (TTL 60s)</h3>
+<p>Consultas repetidas ao mesmo produto são servidas direto do Redis, sem queries ao PostgreSQL.</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Sem cache</th>
+<th>Com cache</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tempo de resposta</td>
+<td>26ms</td>
+<td>4ms</td>
+</tr>
+<tr>
+<td>Speedup</td>
+<td>—</td>
+<td><strong>8x</strong></td>
+</tr>
+<tr>
+<td>Queries no Postgres</td>
+<td>1 por requisição</td>
+<td>0 (dentro do TTL)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2-metricas-nativas-de-cache-via-micrometer-actuator">2. Métricas nativas de cache via Micrometer + Actuator</h3>
+<p>O serviço expõe métricas de cache hit/miss via Spring Actuator, acessíveis em <code>/actuator/prometheus</code> e <code>/actuator/caches/products</code>, integradas ao Prometheus para monitoramento em tempo real.</p>
 
 
 
