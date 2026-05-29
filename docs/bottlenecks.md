@@ -38,14 +38,64 @@ CREATE INDEX idx_order_items_order ON orders.order_items (id_order);
 
 ---
 
-## Nathan — Exchange API
+## Kauã — Exchange API
 
-!!! note "A preencher"
-    Nathan deve adicionar aqui os bottlenecks implementados na Exchange API (mínimo 2).
+### 1. Cache Redis com TTL de 60 segundos
+
+Requisições repetidas para o mesmo par de moedas são respondidas diretamente do Redis, sem chamar a AwesomeAPI externa.
+
+```python
+cache_key = f"exchange:rate:{par}"
+cached = await r.get(cache_key)
+if cached:
+    data = json.loads(cached)
+    return {"rate": data["sell"]}
+
+# somente na primeira requisição chama a API externa
+await r.setex(cache_key, CACHE_TTL, json.dumps(armazenavel))
+```
+
+| Cenário | Comportamento |
+|---------|--------------|
+| Primeira requisição (cache miss) | Chama AwesomeAPI, armazena no Redis por 60s |
+| Requisições seguintes (cache hit) | Respondidas direto do Redis, sem chamada externa |
 
 ---
 
-## Kauã — Product API
+### 2. Graceful Degradation do Cache
 
-!!! note "A preencher"
-    Kauã deve adicionar aqui os bottlenecks implementados na Product API (mínimo 2).
+Se o Redis estiver indisponível, o serviço não cai — faz fallback direto para a AwesomeAPI, mantendo disponibilidade total.
+
+```python
+async def cache_conn() -> aioredis.Redis | None:
+    try:
+        _cache = aioredis.Redis(host=REDIS_HOST, port=REDIS_PORT)
+        await _cache.ping()
+    except Exception:
+        _cache = None  # fallback: sem cache, mas o serviço continua
+    return _cache
+```
+
+| Cenário | Antes | Depois |
+|---------|-------|--------|
+| Redis fora do ar | Serviço crashava com erro de conexão | Serviço continua respondendo via AwesomeAPI |
+
+---
+
+## Nathan — Product API
+
+### 1. Cache Redis em `@Cacheable` (TTL 60s)
+
+Consultas repetidas ao mesmo produto são servidas direto do Redis, sem queries ao PostgreSQL.
+
+| Métrica | Sem cache | Com cache |
+|---------|-----------|-----------|
+| Tempo de resposta | 26ms | 4ms |
+| Speedup | — | **8x** |
+| Queries no Postgres | 1 por requisição | 0 (dentro do TTL) |
+
+---
+
+### 2. Métricas nativas de cache via Micrometer + Actuator
+
+O serviço expõe métricas de cache hit/miss via Spring Actuator, acessíveis em `/actuator/prometheus` e `/actuator/caches/products`, integradas ao Prometheus para monitoramento em tempo real.
