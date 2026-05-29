@@ -960,6 +960,8 @@
 </tr>
 </tbody>
 </table>
+<p><img alt="HPA em ação — 10 réplicas atingidas" src="../infra/img/hpa-scaling.png" />
+<em><code>kubectl get hpa</code> — gateway escalado para 10 réplicas no cluster EKS</em></p>
 <p><strong>Saída real do cluster (<code>kubectl get hpa</code>):</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>NAME      REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gateway   Deployment/gateway   cpu: 0%/50%     1         10        10         5m10s
