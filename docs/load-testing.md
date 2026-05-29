@@ -72,12 +72,35 @@ kubectl delete hpa gateway
 | ~90 | 8 | 234% | `SuccessfulRescale → 8` |
 | ~105 | 10 | 131% | `SuccessfulRescale → 10` (máximo) |
 
-**Eventos registrados pelo HPA:**
+**Saída real do cluster (`kubectl get hpa`):**
 
 ```
-Normal  SuccessfulRescale  New size: 4;  reason: cpu resource utilization above target
-Normal  SuccessfulRescale  New size: 8;  reason: cpu resource utilization above target
-Normal  SuccessfulRescale  New size: 10; reason: cpu resource utilization above target
+NAME      REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+gateway   Deployment/gateway   cpu: 0%/50%     1         10        10         5m10s
+```
+
+**Saída real do cluster (`kubectl get pods -l app=gateway`):**
+
+```
+NAME                       READY   STATUS    RESTARTS   AGE
+gateway-59cf98bffd-cr7qg   1/1     Running   0          4m11s
+gateway-59cf98bffd-qzwvd   1/1     Running   0          7m14s
+gateway-59cf98bffd-v4nsr   1/1     Running   0          4m11s
+gateway-59cf98bffd-xc72q   1/1     Running   0          4m11s
+gateway-59cf98bffd-4x7zw   0/1     Pending   0          3m41s
+gateway-59cf98bffd-58rhn   0/1     Pending   0          3m41s
+gateway-59cf98bffd-67wgf   0/1     Pending   0          3m41s
+gateway-59cf98bffd-79hfg   0/1     Pending   0          3m41s
+gateway-59cf98bffd-7smd5   0/1     Pending   0          3m26s
+gateway-59cf98bffd-v6p79   0/1     Pending   0          3m26s
+```
+
+**Eventos registrados pelo HPA (`kubectl describe hpa gateway`):**
+
+```
+Normal  SuccessfulRescale  New size: 4;  reason: cpu resource utilization (percentage of request) above target
+Normal  SuccessfulRescale  New size: 8;  reason: cpu resource utilization (percentage of request) above target
+Normal  SuccessfulRescale  New size: 10; reason: cpu resource utilization (percentage of request) above target
 ```
 
 ---
