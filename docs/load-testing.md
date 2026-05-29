@@ -49,5 +49,51 @@ kubectl delete hpa gateway
 
 ## Resultados
 
-!!! note "A preencher"
-    Adicionar aqui os resultados obtidos: tempo de resposta, número de réplicas criadas, gráficos do HPA em ação.
+### Configuração do Teste
+
+| Parâmetro | Valor |
+|-----------|-------|
+| Cluster | `eks-store` — `us-east-2` |
+| Node | 1× `t3.medium` (2 vCPU, ~3.8 GB RAM) |
+| HPA target CPU | 50% |
+| Réplicas mínimas / máximas | 1 / 10 |
+| Geradores de carga | 5 pods busybox (`sleep 0.001`) |
+| Endpoint testado | `GET /orders/health-check` via gateway |
+
+---
+
+### Progressão do Escalonamento
+
+| Tempo (s) | Réplicas | CPU (% do request) | Evento HPA |
+|-----------|----------|--------------------|------------|
+| 0 | 1 | ~0% | Linha de base |
+| ~30 | 1 | 169% | Carga detectada |
+| ~60 | 4 | 240% | `SuccessfulRescale → 4` |
+| ~90 | 8 | 234% | `SuccessfulRescale → 8` |
+| ~105 | 10 | 131% | `SuccessfulRescale → 10` (máximo) |
+
+**Eventos registrados pelo HPA:**
+
+```
+Normal  SuccessfulRescale  New size: 4;  reason: cpu resource utilization above target
+Normal  SuccessfulRescale  New size: 8;  reason: cpu resource utilization above target
+Normal  SuccessfulRescale  New size: 10; reason: cpu resource utilization above target
+```
+
+---
+
+### Observações
+
+- O HPA levou **~105 segundos** para atingir o máximo de 10 réplicas a partir de 1.
+- A CPU chegou a **240% do request** (150m solicitado, ~360m consumido por pod) durante o pico.
+- Com 10 réplicas, a carga foi distribuída e o uso por pod caiu para **131%**, indicando que mais réplicas ou um node maior seriam necessários para absorver completamente a carga dos 5 geradores.
+- O `metrics-server` já estava instalado no cluster, o que foi pré-requisito para o HPA funcionar.
+
+---
+
+### Limpeza Após o Teste
+
+```bash
+kubectl delete hpa gateway
+kubectl delete pod load-generator load-generator-2 load-generator-3 load-generator-4 load-generator-5
+```

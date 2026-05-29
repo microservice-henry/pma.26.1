@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exchange-mappings
+data:
+  get-rate.json: |
+    {
+      "priority": 1,
+      "request": { "method": "GET", "urlPath": "/exchange", "queryParameters": { "from": { "equalTo": "USD" }, "to": { "equalTo": "BRL" } } },
+      "response": { "status": 200, "jsonBody": { "rate": 6.0 }, "headers": { "Content-Type": "application/json" } }
+    }
+  get-rate-path-brl.json: |
+    {
+      "priority": 1,
+      "request": { "method": "GET", "urlPath": "/exchange/BRL" },
+      "response": { "status": 200, "jsonBody": { "currency": "BRL", "rate": 6.0 }, "headers": { "Content-Type": "application/json" } }
+    }
+  invalid-currency.json: |
+    {
+      "priority": 10,
+      "request": { "method": "GET", "urlPath": "/exchange" },
+      "response": { "status": 404 }
+    }
+  invalid-currency-path.json: |
+    {
+      "priority": 2,
+      "request": { "method": "GET", "urlPathPattern": "/exchange/.*" },
+      "response": { "status": 404 }
+    }
