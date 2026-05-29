@@ -960,10 +960,27 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Eventos registrados pelo HPA:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Normal  SuccessfulRescale  New size: 4;  reason: cpu resource utilization above target
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Normal  SuccessfulRescale  New size: 8;  reason: cpu resource utilization above target
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Normal  SuccessfulRescale  New size: 10; reason: cpu resource utilization above target
+<p><strong>Saída real do cluster (<code>kubectl get hpa</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>NAME      REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gateway   Deployment/gateway   cpu: 0%/50%     1         10        10         5m10s
+</code></pre></div>
+<p><strong>Saída real do cluster (<code>kubectl get pods -l app=gateway</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>NAME                       READY   STATUS    RESTARTS   AGE
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>gateway-59cf98bffd-cr7qg   1/1     Running   0          4m11s
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>gateway-59cf98bffd-qzwvd   1/1     Running   0          7m14s
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>gateway-59cf98bffd-v4nsr   1/1     Running   0          4m11s
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>gateway-59cf98bffd-xc72q   1/1     Running   0          4m11s
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>gateway-59cf98bffd-4x7zw   0/1     Pending   0          3m41s
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>gateway-59cf98bffd-58rhn   0/1     Pending   0          3m41s
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>gateway-59cf98bffd-67wgf   0/1     Pending   0          3m41s
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>gateway-59cf98bffd-79hfg   0/1     Pending   0          3m41s
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>gateway-59cf98bffd-7smd5   0/1     Pending   0          3m26s
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>gateway-59cf98bffd-v6p79   0/1     Pending   0          3m26s
+</code></pre></div>
+<p><strong>Eventos registrados pelo HPA (<code>kubectl describe hpa gateway</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Normal  SuccessfulRescale  New size: 4;  reason: cpu resource utilization (percentage of request) above target
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Normal  SuccessfulRescale  New size: 8;  reason: cpu resource utilization (percentage of request) above target
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Normal  SuccessfulRescale  New size: 10; reason: cpu resource utilization (percentage of request) above target
 </code></pre></div>
 <hr />
 <h3 id="observacoes">Observações</h3>
@@ -975,8 +992,8 @@
 </ul>
 <hr />
 <h3 id="limpeza-apos-o-teste">Limpeza Após o Teste</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>hpa<span class="w"> </span>gateway
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>load-generator<span class="w"> </span>load-generator-2<span class="w"> </span>load-generator-3<span class="w"> </span>load-generator-4<span class="w"> </span>load-generator-5
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>hpa<span class="w"> </span>gateway
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>load-generator<span class="w"> </span>load-generator-2<span class="w"> </span>load-generator-3<span class="w"> </span>load-generator-4<span class="w"> </span>load-generator-5
 </code></pre></div>
 
 
