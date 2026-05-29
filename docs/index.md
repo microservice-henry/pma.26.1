@@ -56,6 +56,12 @@ Plataforma de e-commerce baseada em arquitetura de microsserviços, onde usuári
 
 ---
 
+## Vídeo de Apresentação
+
+<iframe width="100%" height="400" src="https://youtu.be/1jqzBKDlxhY" title="Store Platform — Apresentação" frameborder="0" allowfullscreen></iframe>
+
+---
+
 ## Uso de Inteligência Artificial
 
 !!! info "Declaração de uso de IA"
