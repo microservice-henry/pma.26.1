@@ -72,6 +72,9 @@ kubectl delete hpa gateway
 | ~90 | 8 | 234% | `SuccessfulRescale → 8` |
 | ~105 | 10 | 131% | `SuccessfulRescale → 10` (máximo) |
 
+![HPA em ação — 10 réplicas atingidas](infra/img/hpa-scaling.png)
+*`kubectl get hpa` — gateway escalado para 10 réplicas no cluster EKS*
+
 **Saída real do cluster (`kubectl get hpa`):**
 
 ```
