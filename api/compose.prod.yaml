@@ -11,8 +11,14 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
       POSTGRES_DB: ${DB_NAME:-store}
 
+  redis:
+    image: redis:7-alpine
+    hostname: redis
+
   account:
-    image: humbertosandmann/account:latest
+    build:
+      context: .
+      dockerfile: account.Dockerfile
     hostname: account
     environment:
       DATABASE_HOST: db
@@ -26,15 +32,35 @@ services:
       - db
 
   product:
-    image: ${PRODUCT_IMAGE:-humbertosandmann/product:latest}
+    image: ${PRODUCT_IMAGE:-nadapebe/product:latest}
     hostname: product
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_DB: ${DB_NAME:-store}
+      DATABASE_USERNAME: ${DB_USER:-store}
+      DATABASE_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - db
+      - redis
 
   exchange:
-    image: ${EXCHANGE_IMAGE:-humbertosandmann/exchange:latest}
+    image: ${EXCHANGE_IMAGE:-kauabcmakiyama/exchange:latest}
     hostname: exchange
+    environment:
+      JWT_SECRET: ${JWT_SECRET_KEY:?JWT_SECRET_KEY is required}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - redis
 
   order:
-    image: henryidesis/order:latest
+    build:
+      context: .
+      dockerfile: ./order-service/Dockerfile
     hostname: order
     environment:
       DATABASE_HOST: db
@@ -43,14 +69,16 @@ services:
       DATABASE_USERNAME: ${DB_USER:-store}
       DATABASE_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
       PRODUCT_API_URL: ${PRODUCT_API_URL:-http://product:8080}
-      EXCHANGE_API_URL: ${EXCHANGE_API_URL:-http://exchange:8080}
+      EXCHANGE_API_URL: ${EXCHANGE_API_URL:-http://exchange:8000}
     depends_on:
       - db
       - product
       - exchange
 
   auth:
-    image: humbertosandmann/auth:latest
+    build:
+      context: .
+      dockerfile: auth.Dockerfile
     hostname: auth
     deploy:
       replicas: 1
@@ -61,7 +89,9 @@ services:
       - account
 
   gateway:
-    image: henryidesis/gateway:latest
+    build:
+      context: .
+      dockerfile: gateway.Dockerfile
     hostname: gateway
     environment:
       CORS_ALLOWED_CREDENTIALS: ${CORS_ALLOWED_CREDENTIALS:-true}

@@ -50,6 +50,12 @@ services:
     networks:
       - app-net
 
+  redis:
+    image: redis:7-alpine
+    hostname: redis
+    networks:
+      - app-net
+
   order:
     build:
       context: .
@@ -62,7 +68,7 @@ services:
       DATABASE_USERNAME: ${DB_USER:-store}
       DATABASE_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
       PRODUCT_API_URL: ${PRODUCT_API_URL:-http://product:8080}
-      EXCHANGE_API_URL: ${EXCHANGE_API_URL:-http://exchange:8080}
+      EXCHANGE_API_URL: ${EXCHANGE_API_URL:-http://exchange:8000}
     deploy:
       replicas: 1
     ports:
@@ -75,18 +81,40 @@ services:
       - app-net
 
   product:
-    image: wiremock/wiremock:3.3.1
+    build:
+      context: .
+      dockerfile: product.Dockerfile
     hostname: product
-    volumes:
-      - ./mocks/product:/home/wiremock
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_DB: ${DB_NAME:-store}
+      DATABASE_USERNAME: ${DB_USER:-store}
+      DATABASE_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    deploy:
+      replicas: 1
+    depends_on:
+      - db
+      - redis
     networks:
       - app-net
 
   exchange:
-    image: wiremock/wiremock:3.3.1
+    build:
+      context: ./exchange-service
+      dockerfile: Dockerfile
     hostname: exchange
-    volumes:
-      - ./mocks/exchange:/home/wiremock
+    environment:
+      JWT_SECRET: ${JWT_SECRET_KEY:?JWT_SECRET_KEY is required}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    deploy:
+      replicas: 1
+    depends_on:
+      - redis
     networks:
       - app-net
 
