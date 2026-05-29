@@ -609,6 +609,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-do-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuração do Teste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressao-do-escalonamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progressão do Escalonamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limpeza-apos-o-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limpeza Após o Teste
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -748,6 +790,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-do-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuração do Teste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progressao-do-escalonamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progressão do Escalonamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Observações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limpeza-apos-o-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limpeza Após o Teste
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -797,10 +881,103 @@
 </code></pre></div>
 <hr />
 <h2 id="resultados">Resultados</h2>
-<div class="admonition note">
-<p class="admonition-title">A preencher</p>
-<p>Adicionar aqui os resultados obtidos: tempo de resposta, número de réplicas criadas, gráficos do HPA em ação.</p>
-</div>
+<h3 id="configuracao-do-teste">Configuração do Teste</h3>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster</td>
+<td><code>eks-store</code> — <code>us-east-2</code></td>
+</tr>
+<tr>
+<td>Node</td>
+<td>1× <code>t3.medium</code> (2 vCPU, ~3.8 GB RAM)</td>
+</tr>
+<tr>
+<td>HPA target CPU</td>
+<td>50%</td>
+</tr>
+<tr>
+<td>Réplicas mínimas / máximas</td>
+<td>1 / 10</td>
+</tr>
+<tr>
+<td>Geradores de carga</td>
+<td>5 pods busybox (<code>sleep 0.001</code>)</td>
+</tr>
+<tr>
+<td>Endpoint testado</td>
+<td><code>GET /orders/health-check</code> via gateway</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="progressao-do-escalonamento">Progressão do Escalonamento</h3>
+<table>
+<thead>
+<tr>
+<th>Tempo (s)</th>
+<th>Réplicas</th>
+<th>CPU (% do request)</th>
+<th>Evento HPA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>~0%</td>
+<td>Linha de base</td>
+</tr>
+<tr>
+<td>~30</td>
+<td>1</td>
+<td>169%</td>
+<td>Carga detectada</td>
+</tr>
+<tr>
+<td>~60</td>
+<td>4</td>
+<td>240%</td>
+<td><code>SuccessfulRescale → 4</code></td>
+</tr>
+<tr>
+<td>~90</td>
+<td>8</td>
+<td>234%</td>
+<td><code>SuccessfulRescale → 8</code></td>
+</tr>
+<tr>
+<td>~105</td>
+<td>10</td>
+<td>131%</td>
+<td><code>SuccessfulRescale → 10</code> (máximo)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Eventos registrados pelo HPA:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Normal  SuccessfulRescale  New size: 4;  reason: cpu resource utilization above target
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Normal  SuccessfulRescale  New size: 8;  reason: cpu resource utilization above target
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Normal  SuccessfulRescale  New size: 10; reason: cpu resource utilization above target
+</code></pre></div>
+<hr />
+<h3 id="observacoes">Observações</h3>
+<ul>
+<li>O HPA levou <strong>~105 segundos</strong> para atingir o máximo de 10 réplicas a partir de 1.</li>
+<li>A CPU chegou a <strong>240% do request</strong> (150m solicitado, ~360m consumido por pod) durante o pico.</li>
+<li>Com 10 réplicas, a carga foi distribuída e o uso por pod caiu para <strong>131%</strong>, indicando que mais réplicas ou um node maior seriam necessários para absorver completamente a carga dos 5 geradores.</li>
+<li>O <code>metrics-server</code> já estava instalado no cluster, o que foi pré-requisito para o HPA funcionar.</li>
+</ul>
+<hr />
+<h3 id="limpeza-apos-o-teste">Limpeza Após o Teste</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>hpa<span class="w"> </span>gateway
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>load-generator<span class="w"> </span>load-generator-2<span class="w"> </span>load-generator-3<span class="w"> </span>load-generator-4<span class="w"> </span>load-generator-5
+</code></pre></div>
 
 
 
